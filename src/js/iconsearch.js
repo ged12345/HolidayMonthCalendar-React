@@ -33,29 +33,33 @@ async function handleIconDetailsResponse(response) {
 // The icon raw data is converted into a blob, which is then converted to
 // a base64 data string.
 async function handleIconDownloadResponse(downloadUrl) {
+    return await iconfinder
+        .get(downloadUrl, {
+            responseType: "blob",
+        })
+        .then(async (response) => {
+            if (response) {
+                console.log(response);
+                const blob = new Blob([response.data], {
+                    type: "image/jpeg",
+                });
+
+                return await convertBlobToBase64(blob);
+            }
+        });
+}
+
+// Convert the downloaded blob jpeg into raw base64 data
+async function convertBlobToBase64(blob) {
     return new Promise(async (resolve, reject) => {
-        await iconfinder
-            .get(downloadUrl, {
-                responseType: "blob",
-            })
-            .then((response) => {
-                if (response) {
-                    console.log(response);
-                    const blob = new Blob([response.data], {
-                        type: "image/jpeg",
-                    });
+        var reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = (event: any) => {
+            const data = event.target.result;
+            var base64data = data;
 
-                    // Convert the downloaded blob jpeg into raw base64 data
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = (event: any) => {
-                        const data = event.target.result;
-                        var base64data = data;
-
-                        resolve(base64data);
-                    };
-                }
-            });
+            resolve(base64data);
+        };
     });
 }
 

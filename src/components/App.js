@@ -14,7 +14,7 @@ class App extends React.Component {
 
         // We need a config file - we may keep this in a separate file
         // then we pass the icon and day down to the holidayDisplay component
-        const iconFile = await iconsearch("Día de los Muertos");
+        const iconFile = await iconsearch("christmas");
         this.setState({ iconFile: iconFile });
     }
 
