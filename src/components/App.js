@@ -24,8 +24,9 @@ class App extends React.Component {
 
         for (var key in holidayconfig) {
             if (
-                holidayconfig[key].date.getMonth() === new Date().getMonth() &&
-                holidayconfig[key].date.getDay() <= new Date().getDay()
+                holidayconfig[key].date.getMonth() ===
+                new Date().getMonth() /*&&
+                holidayconfig[key].date.getDay() <= new Date().getDay()*/
             ) {
                 chosenHoliday = key;
                 chosenMessage = holidayconfig[key].message;

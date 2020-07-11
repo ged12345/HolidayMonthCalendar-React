@@ -1,5 +1,4 @@
 // Webpack includes this css in our index.html when combining files
-import "./seasonConfig.js";
 import "./HolidayDisplay.css";
 import React from "react";
 
@@ -16,8 +15,6 @@ const getSeason = (lat, month) => {
 class HolidayDisplay extends React.Component {
     render() {
         const season = getSeason(this.props.lat, new Date().getMonth());
-
-        //const { text, iconName } = seasonConfig[season];
 
         return (
             <div className={`holiday-display ${season}`}>
