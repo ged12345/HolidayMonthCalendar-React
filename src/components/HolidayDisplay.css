@@ -30,10 +30,21 @@
     height: 100vh;
 }
 
+.holiday-display .message {
+    margin-top: 40px !important;
+}
+
+.holiday-display .holiday {
+    position: absolute;
+    margin: auto 0;
+}
+
 .summer {
     background-color: orange;
+    color: rgb(167, 122, 40);
 }
 
 .winter {
     background-color: aliceblue;
+    color: rgb(46, 129, 202);
 }

@@ -1,18 +1,7 @@
 // Webpack includes this css in our index.html when combining files
+import "./seasonConfig.js";
 import "./HolidayDisplay.css";
 import React from "react";
-
-// Configuration object
-const holidayConfig = {
-    summer: {
-        text: "Let's hit the beach!",
-        iconName: "sun",
-    },
-    winter: {
-        text: "Burr, it is chilly",
-        iconName: "snowflake",
-    },
-};
 
 // Determine what season is
 const getSeason = (lat, month) => {
@@ -28,7 +17,7 @@ class HolidayDisplay extends React.Component {
     render() {
         const season = getSeason(this.props.lat, new Date().getMonth());
 
-        const { text, iconName } = holidayConfig[season];
+        //const { text, iconName } = seasonConfig[season];
 
         return (
             <div className={`holiday-display ${season}`}>
@@ -37,7 +26,12 @@ class HolidayDisplay extends React.Component {
                     src={this.props.iconFile}
                     className={`icon-left icon`}
                 />
-                <h1>{text}</h1>
+                <div className={`holiday ${season}`}>
+                    <h1>{this.props.chosenHoliday.toUpperCase()}</h1>
+                </div>
+                <div className={`holiday message`}>
+                    <h2>{this.props.chosenMessage}</h2>
+                </div>
                 <img
                     alt=""
                     src={this.props.iconFile}
