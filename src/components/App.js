@@ -1,5 +1,6 @@
 import React from "react";
 import iconsearch from "../js/iconsearch.js";
+import { splitString } from "../js/utilities.js";
 import holidayconfig from "./holidayConfig";
 import HolidayDisplay from "./HolidayDisplay";
 import Spinner from "./Spinner";
@@ -22,16 +23,17 @@ class App extends React.Component {
         var chosenHoliday = this.state.chosenHoliday;
         var chosenMessage = this.state.chosenMessage;
 
-        for (var key in holidayconfig) {
+        Object.keys(holidayconfig).forEach((key) => {
             if (
-                holidayconfig[key].date.getMonth() ===
-                new Date().getMonth() /*&&
-                holidayconfig[key].date.getDay() <= new Date().getDay()*/
+                (holidayconfig[key].date.getDay() >= new Date().getDay() &&
+                    holidayconfig[key].date.getMonth() ===
+                        new Date().getMonth()) ||
+                holidayconfig[key].date.getMonth() === new Date().getMonth()
             ) {
-                chosenHoliday = key;
+                chosenHoliday = splitString(key);
                 chosenMessage = holidayconfig[key].message;
             }
-        }
+        });
 
         // We need a config file - we may keep this in a separate file
         // then we pass the icon and day down to the holidayDisplay component

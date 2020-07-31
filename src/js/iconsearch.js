@@ -1,10 +1,9 @@
 import iconfinder from "../api/iconfinder.js";
 
-// Handles the first REST API GET call to etrieve the icon details and
+// Handles the first REST API GET call to retrieve the icon details and
 // downloadUrl
 async function handleIconDetailsResponse(response) {
     const icons = response.data.icons;
-    console.log(icons);
 
     if (icons.length > 0) {
         const randomIconIndex =
@@ -46,6 +45,9 @@ async function handleIconDownloadResponse(downloadUrl) {
 
                 return await convertBlobToBase64(blob);
             }
+        })
+        .catch((response) => {
+            console.log(`Error: ${response}`);
         });
 }
 
@@ -77,5 +79,8 @@ export default async (term) => {
         )
         .then(async (response) => {
             return await handleIconDetailsResponse(response);
+        })
+        .catch((response) => {
+            console.log(`Error: ${response}`);
         });
 };
